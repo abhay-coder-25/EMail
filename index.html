@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Inbox Sweep</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+  <div id="app">
+    <!-- Header with 5-Bucket Counters -->
+    <header class="app-header">
+      <div class="header-left">
+        <span class="logo">🧹 Inbox Sweep</span>
+        <div class="bucket-counters">
+          <span class="bucket-pill pill-general" id="count-general">General: 0</span>
+          <span class="bucket-pill pill-wip" id="count-wip">WIP: 0/0</span>
+          <span class="bucket-pill pill-kept" id="count-kept">Kept: 0</span>
+          <span class="bucket-pill pill-review" id="count-review">Review: 0</span>
+          <span class="bucket-pill pill-deleted" id="count-deleted">Deleted: 0</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <button id="sync-btn" class="btn btn-secondary hidden">📥 Sync Inbox</button>
+        <button id="start-wip-btn" class="btn btn-primary hidden">⚡ Start WIP (100)</button>
+        <button id="stop-btn" class="btn btn-warning hidden">Pause / Stop WIP</button>
+        <button id="commit-btn" class="btn btn-danger hidden">Commit Trash (0)</button>
+        <button id="auth-btn" class="btn">Connect Gmail</button>
+        <button id="logout-btn" class="btn btn-ghost hidden">Disconnect</button>
+      </div>
+    </header>
+
+    <!-- Main Deck -->
+    <main class="deck-container">
+      <div id="deck" class="deck">
+        <div class="empty-state">
+          <h2>Ready to clean?</h2>
+          <p>Connect your Gmail account to sync inbox items into General.</p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer Controls -->
+    <footer id="footer-actions" class="footer-actions hidden">
+      <button class="action-pill nav-action" id="btn-swipe-left">⬅ Delete</button>
+      <button class="action-pill keep-action" id="btn-swipe-up">⬆ Keep</button>
+      <button class="action-pill review-action" id="btn-swipe-down">⬇ Review</button>
+      <button class="action-pill nav-action" id="btn-swipe-right">Delete ➡</button>
+    </footer>
+
+    <!-- Review / Early Stop Modal -->
+    <div id="review-modal" class="modal hidden">
+      <div class="modal-card">
+        <h3 id="modal-title">Bucket Summary</h3>
+        <p class="summary-text" id="review-summary"></p>
+        <div class="queued-emails-scroll" id="queued-emails-list"></div>
+        <div class="modal-buttons" id="modal-buttons"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
